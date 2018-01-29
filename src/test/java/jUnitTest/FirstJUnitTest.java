@@ -1,5 +1,6 @@
 package jUnitTest;
 
+import com.jsystems.User;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -61,4 +62,32 @@ public class FirstJUnitTest extends ConfigJUnit {
         assertThat(integery, hasSize(6));
         assertArrayEquals(integery.toArray(), integery2.toArray());
     }
+
+    String ala = "ala";
+
+    String beta2 = "ala";
+    String ala2 = new String("ala");
+    String beta = ala2;
+    int dwoja;
+    Integer dwoja2 = new Integer(2);
+    Integer dwoja3;
+    @Test
+            public void czwartyTest(){
+
+    assertTrue(ala == beta2);
+//    assertTrue(ala.equals(ala2));
+    assertTrue(beta.equals(ala2));
+    assertNull(dwoja3);
+
+    }
+
+    User naszUser = new User();
+
+
+    @Test
+    public void piatyTest(){
+        assertTrue(naszUser.countAge(20) == 120);
+        assertFalse(naszUser.countAge(15) == 120);
+    }
+
 }

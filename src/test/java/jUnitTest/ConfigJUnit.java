@@ -15,4 +15,5 @@ public class ConfigJUnit {
         System.out.println("======= @BeforeClass SecondJUnitTest  ========");
 
     }
+
 }
