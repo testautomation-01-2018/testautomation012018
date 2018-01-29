@@ -47,5 +47,6 @@ public class FirstJUnitTest extends ConfigJUnit {
     public void drugiTest(){
         Integer wartoscTestowa = null;
         assertNull(wartoscTestowa);
+        assertNull(wartoscTestowa);
     }
 }
