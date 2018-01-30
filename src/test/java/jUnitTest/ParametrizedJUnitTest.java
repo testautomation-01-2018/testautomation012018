@@ -33,7 +33,7 @@ public class ParametrizedJUnitTest extends ConfigJUnit {
     }
 
     @Test
-    @Parameters({"lll@de.do", "sdfsdf.sdf.sdf"})
+    @Parameters({"lll@de.do", "sdfsdf@sdf.sdf"})
                 public void checkIfEmailValid(String email){
         assertTrue(PhoneValidator.isValidEmail(email));
     }
