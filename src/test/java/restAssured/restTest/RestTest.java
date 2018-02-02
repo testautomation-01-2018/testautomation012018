@@ -1,11 +1,14 @@
 package restAssured.restTest;
 
+import com.jsystems.models.ErrorResponse;
 import com.jsystems.models.MyObj;
 import com.jsystems.models.User;
 import io.restassured.RestAssured;
+import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.specification.RequestSpecification;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import restAssured.Config;
@@ -125,6 +128,8 @@ public class RestTest extends Config {
         Response response = RestAssured.given()
                 .contentType(ContentType.JSON)
                 .when()
+                .queryParam("name", "Piotr")
+                .queryParam("surname", "Kowalski")
                 .get("/5a6a58222e0000d0377a7789")
                 .andReturn();
 
@@ -162,6 +167,53 @@ public class RestTest extends Config {
                 .as(String[].class)).toString();
 
         assertThat(responsePostEmptyTable).isEqualTo("[]");
+
+    }
+
+    @Test
+    public void errorTest(){
+        Response response = given()
+                .contentType(ContentType.JSON)
+                .when()
+                .post("/5a690b452e000054007a73cd")
+                .andReturn();
+
+        ErrorResponse errorResponse = response
+                .then()
+                .extract()
+                .body()
+                .as(ErrorResponse.class);
+
+        assertTrue(errorResponse.error.error_code == 400);
+        assertThat(errorResponse.error.validation_erro)
+                .isEqualTo("invalid_email");
+        assertThat(errorResponse.error.message)
+                .isEqualTo("your email is invalid");
+
+
+    }
+
+    @Test
+    public void specBuild(){
+//        RequestSpecification requestSpecification = new RequestSpecBuilder()
+//                .addCookie("sdf","sadf")
+//                .addHeader("Authorization", "asfeasdf7658765")
+//                .setBaseUri("http://www.onet.pl")
+//                .build();
+
+        Response response = given()
+                .spec(requestSpecification)
+                .when()
+                .get("/5a6b77973100009d211b8b0d")
+                .andReturn();
+
+        MyObj myObj = response
+                .then()
+                .extract()
+                .body()
+                .as(MyObj.class);
+        assertThat(myObj.name).isEqualTo("Piotr");
+
 
     }
 
