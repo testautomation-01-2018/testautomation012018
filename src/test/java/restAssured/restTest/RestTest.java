@@ -1,10 +1,11 @@
-package restAssured;
+package restAssured.restTest;
 
 import com.jsystems.models.MyObj;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import restAssured.Config;
 
 import static com.google.common.truth.Truth.assertThat;
 import static io.restassured.RestAssured.given;
@@ -36,7 +37,7 @@ public class RestTest extends Config {
                 .contentType(ContentType.JSON)
                 .when()
 //                .get("http://www.mocky.io/v2/5a6a58222e0000d0377a7789")
-                .get("/5a6a58222e0000d0377a7789")
+                .get("/5a6a58222e0000d0377a7789"  )
                 .then()
                 .assertThat()
                 .statusCode(200)
@@ -64,6 +65,8 @@ public class RestTest extends Config {
         assertThat(myObj.name).isEqualTo("Piotr");
         assertThat(myObj.surname).isEqualTo("Kowalski");
     }
+
+
 
 
 }
